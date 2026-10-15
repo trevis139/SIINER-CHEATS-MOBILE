@@ -1,4 +1,5 @@
-name: SIINER CHEATS MOBILE
+
+name: Compilar SIINER CHEATS MOBILE
 
 on:
   workflow_dispatch:
@@ -7,12 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Baixar arquivos do repositorio
-        uses: actions/checkout@v4
-
+      - uses: actions/checkout@v4
       - name: Verificar arquivos
-        run: |
-          echo "Repositorio SIINER CHEATS MOBILE"
-          echo "Preparando a compilacao do Android"
-          ls -la
-          
+        run: ls -la
+        
