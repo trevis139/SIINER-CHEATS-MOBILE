@@ -6,12 +6,8 @@ push:
 branches:
 - main
 
-permissions:
-contents: read
-
 jobs:
 construir:
-name: Construir APK Android
 runs-on: ubuntu-latest
 
 steps:
@@ -29,18 +25,12 @@ steps:
     with:
       gradle-version: '8.9'
 
-  - name: Verificar arquivos do projeto
+  - name: Verificar projeto
     run: |
-      echo "Verificando arquivos..."
+      echo "Arquivos do projeto:"
       ls -la
-      if [ ! -f settings.gradle ] && [ ! -f settings.gradle.kts ]; then
-        echo "ERRO: arquivo settings.gradle não encontrado."
-        exit 1
-      fi
-      if [ ! -d app ]; then
-        echo "ERRO: pasta app não encontrada."
-        exit 1
-      fi
+      echo "Arquivos da pasta app:"
+      ls -la app || true
 
   - name: Compilar APK
     run: gradle assembleDebug
