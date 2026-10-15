@@ -1,3 +1,4 @@
+
 name: Compilar SIINER CHEATS MOBILE
 
 on:
@@ -33,12 +34,15 @@ jobs:
 
       - name: Verificar arquivos do projeto
         run: |
+          echo "Arquivos da raiz:"
           ls -la
+          echo "Arquivos da pasta app:"
           ls -la app
+          echo "Arquivos de código:"
           find app/src -type f
 
       - name: Construir APK
-        run: gradle assembleDebug --stacktrace
+        run: gradle assembleDebug --stacktrace --info
 
       - name: Publicar APK
         if: success()
