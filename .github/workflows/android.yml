@@ -34,7 +34,7 @@ steps:
       echo "Verificando arquivos..."
       ls -la
       if [ ! -f settings.gradle ] && [ ! -f settings.gradle.kts ]; then
-        echo "ERRO: settings.gradle ou settings.gradle.kts não encontrado."
+        echo "ERRO: arquivo settings.gradle não encontrado."
         exit 1
       fi
       if [ ! -d app ]; then
