@@ -6,8 +6,12 @@ push:
 branches:
 - main
 
+permissions:
+contents: read
+
 jobs:
 construir:
+name: Construir APK Android
 runs-on: ubuntu-latest
 
 steps:
@@ -25,11 +29,26 @@ steps:
     with:
       gradle-version: '8.9'
 
+  - name: Verificar arquivos do projeto
+    run: |
+      echo "Verificando arquivos..."
+      ls -la
+      if [ ! -f settings.gradle ] && [ ! -f settings.gradle.kts ]; then
+        echo "ERRO: settings.gradle ou settings.gradle.kts não encontrado."
+        exit 1
+      fi
+      if [ ! -d app ]; then
+        echo "ERRO: pasta app não encontrada."
+        exit 1
+      fi
+
   - name: Compilar APK
     run: gradle assembleDebug
 
   - name: Salvar APK
+    if: success()
     uses: actions/upload-artifact@v4
     with:
       name: SIINER-CHEATS-MOBILE
       path: app/build/outputs/apk/debug/*.apk
+      if-no-files-found: error
